@@ -1,28 +1,30 @@
-# Build Commands
+# Building the Image
 
 ## Build Test Command
 
 ```bash
-docker build --build-arg USER_NAME=ian --build-arg USER_EMAIL=ian@teda.id.au --build-arg USER_PASSWORD=password -t test-sshd —-squash . && docker run -d -P --name test-sshd test-sshd && docker port test-sshd
+docker build --build-arg USER_NAME=unicorn --build-arg USER_EMAIL=unicorn@hotmail.com --build-arg USER_PASSWORD=password -t test-sshd . —-squash && docker run -d -P --name test-sshd test-sshd && docker port test-sshd
 ```
 
 ## Clean Test Build
 
 ```bash
-docker build --no-cache --progress=plain —-secret USER_NAME=Ian,USER_PASSWORD=password -t test-sshd . && docker run -d -P --name test-sshd test-sshd && docker port test-sshd 22
+docker container stop test-sshd && docker container rm test-sshd && docker image rm test-sshd
+docker image -ls
+docker rmi xxx
 ```
 
 ## Build Image for NAS
 
 ```bash
-docker build --build-arg USER_NAME=ian --build-arg USER_EMAIL=ian@teda.id.au --build-arg USER_PASSWORD=password -t ianteda/vscode-openssh-server .  —-squash --no-cache  && docker save ianteda/vscode-openssh-server:latest | gzip > vscode-openssh-server.tar.gz
+docker build --build-arg USER_NAME=unicorn --build-arg USER_EMAIL=unicorn@hotmail.com --build-arg USER_PASSWORD=password -t ianteda/vscode-openssh-server .  —-squash --no-cache  && docker save ianteda/vscode-openssh-server:latest | gzip > vscode-openssh-server.tar.gz
 ```
 
 ## Upload to NAS
 
 In DSM: Docker->Image->Add From File->nas_mount->vscode-openssh-server.tar.gz
 
-### References
+## References
 
 * [prerequisites](https://code.visualstudio.com/docs/remote/linux#_remote-host-container-wsl-linux-prerequisites)
 * [doomkin/ubuntu-ssh](https://github.com/doomkin/ubuntu-ssh)
