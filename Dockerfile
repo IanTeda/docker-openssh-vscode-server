@@ -148,4 +148,7 @@ RUN npm install -g \
         npm@latest \
         ember-cli@latest
 
+# Fix Watchman error
+RUN echo "fs.inotify.max_user_watches=524288" >> /etc/sysctl.conf
+
 EXPOSE 4200 7020 7357 9222
